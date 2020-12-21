@@ -9,8 +9,7 @@ function App() {
     { title: "dvs", note: "hi", project: "slsl", date: "sdvsdv" },
   ]);
   const handleForm = (note) => {
-    console.log(note);
-    setNotes([...notes, { note }]);
+    setNotes([...notes, note]);
   };
   return (
     <div className="App">
