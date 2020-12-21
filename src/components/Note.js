@@ -1,5 +1,9 @@
+import ListInput from "./ListInput";
+import ListItem from "./ListItem";
+
 function Note(props) {
-  const { title, note, project, date } = props.note;
+  const { id, title, note, list, project, date } = props.note;
+
   return (
     <div className="note-wrapper">
       <button className="delete-button">x</button>
@@ -21,11 +25,17 @@ function Note(props) {
           spellCheck="false"
         ></textarea>
       </div>
-      <input
-        type="text"
-        placeholder="add list item"
-        className="change-input"
-      ></input>
+      {list !== undefined &&
+        list.map((item, index) => (
+          <ListItem
+            id={item.id}
+            changeChecked={(value) => props.changeChecked(value, id, item.id)}
+            completed={item.completed}
+            key={`${item}${index}`}
+            item={item.name}
+          />
+        ))}
+      <ListInput handleListInput={(value) => props.addListItem(value, id)} />
       <div className="due-date-div">
         <p className="project" data-testid="project">
           {project}

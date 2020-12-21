@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import ListInput from "./ListInput";
 
 function Form(props) {
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState(props.display);
   const [note, setNote] = useState({
+    id: "",
     title: "",
     note: "",
-    // list: "",
+    list: [],
     date: "",
     project: "",
   });
@@ -14,18 +16,30 @@ function Form(props) {
     setNote({ ...note, [name]: value });
   };
 
+  const handleListInput = (value) => {
+    setNote((values) => ({
+      ...values,
+      list: [...values.list, { value, completed: false }],
+    }));
+  };
+
+  const resetForm = () => {
+    setNote({
+      id: "",
+      title: "",
+      note: "",
+      list: [],
+      date: "",
+      project: "",
+    });
+  };
+
   const handleSubmit = () => {
     setDisplay(false);
-    if (note.note !== "") {
+    if (note.note !== "" || note.list.length !== 0) {
       props.handleForm(note);
-      setNote({
-        title: "",
-        note: "",
-        list: "",
-        date: "",
-        project: "",
-      });
     }
+    resetForm();
   };
 
   return (
@@ -52,6 +66,14 @@ function Form(props) {
         onClick={() => setDisplay(true)}
         onChange={(e) => handleChange(e)}
       ></textarea>
+
+      {display ? <ListInput handleListInput={handleListInput} /> : null}
+
+      {note.list.map((item, index) => (
+        <li className="temporary-form-list-item" key={index}>
+          {item}
+        </li>
+      ))}
 
       {display ? (
         <div id="form-bottom-input">
