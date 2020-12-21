@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import App from "../App.js";
+import From from "../components/Form";
 import React from "react";
 
 describe("Form tests", () => {
   beforeEach(() => {
-    render(<App />);
+    render(<From />);
   });
   test("title input renders", () => {
     expect(screen.getByLabelText("title-input")).toBeInTheDocument();
