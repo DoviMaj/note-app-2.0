@@ -4,7 +4,9 @@ import ListItem from "./ListItem";
 
 function Note(props) {
   const { id, title, note, list, project, date } = props.note;
-  const [titleEdit, setTitleEdit] = useState(false);
+  const [titleEdit, setTitleEdit] = useState(props.edit);
+  const [noteEdit, setNoteEdit] = useState(props.edit);
+  const [mouseHover, setMouseHover] = useState(false);
 
   const submitChange = (e) => {
     const field = e.target.name;
@@ -12,14 +14,29 @@ function Note(props) {
     props.changeNoteField(value, field, id);
   };
 
+  const toggleMouseHover = () => {
+    setMouseHover(!mouseHover);
+  };
+
   return (
-    <div className="note-wrapper">
-      <button className="delete-button">x</button>
+    <div
+      className="note-wrapper"
+      onMouseEnter={toggleMouseHover}
+      onMouseLeave={toggleMouseHover}
+    >
+      {mouseHover ? (
+        <button className="delete-button" onClick={() => props.deleteNote(id)}>
+          x
+        </button>
+      ) : null}
+
       <div>
         {titleEdit ? (
           <input
+            autoFocus
             name="title"
             onChange={(e) => submitChange(e)}
+            onBlur={() => setTitleEdit(!titleEdit)}
             onKeyUp={(e) =>
               e.key === "Enter" ? setTitleEdit(!titleEdit) : null
             }
@@ -37,26 +54,49 @@ function Note(props) {
           </h2>
         )}
       </div>
-      <div className="">
-        <p className="note-text" data-testid="note">
-          {note}
-        </p>
+
+      {noteEdit ? (
         <textarea
-          className="change-input hide note-input"
+          autoFocus
+          // sets autoFocus to end of text
+          onFocus={function (e) {
+            var val = e.target.value;
+            e.target.value = "";
+            e.target.value = val;
+          }}
+          name="note"
+          value={note}
+          onChange={(e) => submitChange(e)}
+          onBlur={() => setNoteEdit(!noteEdit)}
+          className="change-input note-input"
           spellCheck="false"
-        ></textarea>
-      </div>
+        />
+      ) : (
+        <div className="">
+          <p
+            className="note-text"
+            data-testid="note"
+            onClick={() => setNoteEdit(!noteEdit)}
+          >
+            {note}
+          </p>
+        </div>
+      )}
+
       {list !== undefined &&
         list.map((item, index) => (
           <ListItem
+            edit={false}
             id={item.id}
-            changeChecked={() => props.changeChecked(id, item.id)}
+            changeListItem={(e) => props.changeListItem(e, id, item.id)}
             completed={item.completed}
-            key={`${item}${index}`}
+            key={`${index}`}
             item={item.name}
           />
         ))}
+
       <ListInput handleListInput={(value) => props.addListItem(value, id)} />
+
       <div className="due-date-div">
         <p className="project" data-testid="project">
           {project}
