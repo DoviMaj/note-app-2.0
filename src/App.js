@@ -38,7 +38,7 @@ function App(props) {
             if (field === "checkbox") {
               return (listItem.completed = !listItem.completed);
             } else {
-              return (listItem[field] = value);
+              return (listItem.name = value);
             }
           } else {
             return listItem;
@@ -58,12 +58,18 @@ function App(props) {
     setNotes(newNotes);
   };
 
+  const deleteNote = (id) => {
+    let newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
+  };
+
   return (
     <div className="App">
       <Form display={false} handleForm={(note) => handleForm(note)} />
       <div className="notes-container">
         {notes.map((note) => (
           <Note
+            deleteNote={deleteNote}
             edit={false}
             changeNoteField={changeNoteField}
             addListItem={addListItem}
