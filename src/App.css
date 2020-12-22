@@ -161,6 +161,7 @@ input {
 .note-title {
   margin: 5px 0px 20px 0px;
   font-size: larger;
+  word-break: break-all;
 }
 
 p {
