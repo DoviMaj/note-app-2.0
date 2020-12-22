@@ -27,27 +27,36 @@ function App(props) {
     );
   };
 
-  const changeListItem = (e, id, taskId) => {
+  const changeListItem = (e, id, listItemId) => {
     const field = e.target.name;
     const value = e.target.value;
     let newNotes = [...notes];
     notes.map((note) => {
       if (id === note.id) {
         note.list.map((listItem) => {
-          if (listItem.id === taskId) {
+          if (listItem.id === listItemId) {
             if (field === "checkbox") {
-              return (listItem.completed = !listItem.completed);
+              listItem.completed = !listItem.completed;
             } else {
-              return (listItem.name = value);
+              listItem.name = value;
             }
-          } else {
-            return listItem;
           }
+          return listItem;
         });
-      } else {
-        return note;
       }
-      return notes;
+      return note;
+    });
+    setNotes(newNotes);
+  };
+
+  const deleteListItem = (id, listItemId) => {
+    let newNotes = [...notes];
+    newNotes.map((note) => {
+      if (id === note.id) {
+        console.log(id, listItemId);
+        note.list = note.list.filter((item) => item.id !== listItemId);
+      }
+      return note;
     });
     setNotes(newNotes);
   };
@@ -69,6 +78,7 @@ function App(props) {
       <div className="notes-container">
         {notes.map((note) => (
           <Note
+            deleteListItem={deleteListItem}
             deleteNote={deleteNote}
             edit={false}
             changeNoteField={changeNoteField}

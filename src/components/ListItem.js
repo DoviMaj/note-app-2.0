@@ -2,10 +2,18 @@ import { useState } from "react";
 
 function ListItem(props) {
   const [listItemEdit, setListItemEdit] = useState(props.edit);
+  const [mouseHover, setMouseHover] = useState(false);
 
+  const toggleMouseHover = () => {
+    setMouseHover(!mouseHover);
+  };
   return (
     <div>
-      <div className="list-item">
+      <div
+        className="list-item"
+        onMouseEnter={toggleMouseHover}
+        onMouseLeave={toggleMouseHover}
+      >
         <input
           name="checkbox"
           onChange={(e) => props.changeListItem(e)}
@@ -38,7 +46,14 @@ function ListItem(props) {
           </li>
         )}
 
-        <button className="delete-checklist-button hide">x</button>
+        {mouseHover ? (
+          <button
+            className="delete-checklist-button"
+            onClick={props.deleteListItem}
+          >
+            x
+          </button>
+        ) : null}
       </div>
     </div>
   );
