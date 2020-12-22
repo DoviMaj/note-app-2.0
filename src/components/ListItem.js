@@ -8,10 +8,16 @@ function ListItem(props) {
           className="checkbox"
           type="checkbox"
         ></input>
-        <li className={`list-item-text ${props.completed ? "checked" : null}`}>
+
+        <li
+          className={`list-item-text ${
+            props.completed ? "checked" : undefined
+          }`}
+        >
           {props.item}
         </li>
         <input spellCheck="false" className="change-input hide"></input>
+
         <button className="delete-checklist-button hide">x</button>
       </div>
     </div>
