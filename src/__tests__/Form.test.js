@@ -4,7 +4,7 @@ import React from "react";
 
 describe("Form tests", () => {
   beforeEach(() => {
-    render(<From />);
+    render(<From display={true} />);
   });
   test("title input renders", () => {
     expect(screen.getByLabelText("title-input")).toBeInTheDocument();
