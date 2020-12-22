@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { randomNum } from "../utils";
 import ListInput from "./ListInput";
 
 function Form(props) {
@@ -17,10 +18,12 @@ function Form(props) {
   };
 
   const handleListInput = (value) => {
-    setNote((values) => ({
-      ...values,
-      list: [...values.list, { value, completed: false }],
-    }));
+    let newNote = { ...note };
+    newNote.list = [
+      ...newNote.list,
+      { name: value, completed: false, id: randomNum() },
+    ];
+    setNote(newNote);
   };
 
   const resetForm = () => {
@@ -67,11 +70,13 @@ function Form(props) {
         onChange={(e) => handleChange(e)}
       ></textarea>
 
-      {display ? <ListInput handleListInput={handleListInput} /> : null}
+      {display ? (
+        <ListInput handleListInput={(value) => handleListInput(value)} />
+      ) : null}
 
       {note.list.map((item, index) => (
         <li className="temporary-form-list-item" key={index}>
-          {item}
+          {item.name}
         </li>
       ))}
 
