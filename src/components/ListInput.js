@@ -2,12 +2,14 @@ import { useState } from "react";
 
 function ListInput(props) {
   const [listItem, setListItem] = useState("");
+
   const submitListItem = (e) => {
     if (e.key === "Enter" && e.target.value !== "") {
       props.handleListInput(listItem);
       setListItem("");
     }
   };
+
   return (
     <div>
       <input

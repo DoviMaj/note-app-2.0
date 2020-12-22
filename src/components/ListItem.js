@@ -3,7 +3,8 @@ function ListItem(props) {
     <div>
       <div className="list-item">
         <input
-          onChange={(e) => props.changeChecked(e.target.value, props.id)}
+          name="checkbox"
+          onChange={(e) => props.changeListItem(e)}
           checked={props.completed}
           className="checkbox"
           type="checkbox"

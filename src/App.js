@@ -12,14 +12,6 @@ function App(props) {
   };
 
   const addListItem = (value, id) => {
-    // let newNotes = [...notes];
-    // newNotes.map((note) => {
-    //   if (id === note.id) {
-    //     note.list = [...note.list, value];
-    //   }
-    // });
-    // setNotes(newNotes);
-
     setNotes(
       notes.map((note) =>
         note.id === id
@@ -35,17 +27,28 @@ function App(props) {
     );
   };
 
-  const changeChecked = (id, taskId) => {
+  const changeListItem = (e, id, taskId) => {
+    const field = e.target.name;
+    const value = e.target.value;
     let newNotes = [...notes];
-    newNotes.map((note) =>
-      id === note.id
-        ? note.list.map((listItem) =>
-            listItem.id === taskId
-              ? (listItem.completed = !listItem.completed)
-              : listItem.completed
-          )
-        : note
-    );
+    notes.map((note) => {
+      if (id === note.id) {
+        note.list.map((listItem) => {
+          if (listItem.id === taskId) {
+            if (field === "checkbox") {
+              return (listItem.completed = !listItem.completed);
+            } else {
+              return (listItem[field] = value);
+            }
+          } else {
+            return listItem;
+          }
+        });
+      } else {
+        return note;
+      }
+      return notes;
+    });
     setNotes(newNotes);
   };
 
@@ -61,9 +64,10 @@ function App(props) {
       <div className="notes-container">
         {notes.map((note) => (
           <Note
+            edit={false}
             changeNoteField={changeNoteField}
-            changeChecked={changeChecked}
             addListItem={addListItem}
+            changeListItem={changeListItem}
             key={note.id}
             note={note}
           />

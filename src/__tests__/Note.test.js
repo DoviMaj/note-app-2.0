@@ -10,7 +10,7 @@ describe("Note", () => {
       project: "im a project",
       date: "im a date",
     };
-    render(<Note note={note} />);
+    render(<Note edit={true} note={note} />);
   });
   it("renders title correctly", () => {
     expect(screen.getByText("im a title")).toBeInTheDocument();
