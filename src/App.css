@@ -341,7 +341,6 @@ li {
 .list-item {
   display: flex;
   position: relative;
-  left: -42px;
   flex-shrink: 0;
   width: 200px;
 }
