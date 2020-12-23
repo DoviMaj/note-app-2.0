@@ -14,7 +14,7 @@ function ListInput(props) {
     <div>
       <input
         className="input-field"
-        placeholder="add list item"
+        placeholder="+   List item"
         value={listItem}
         onChange={(e) => setListItem(e.target.value)}
         onKeyPress={(e) => submitListItem(e)}
