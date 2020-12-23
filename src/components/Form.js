@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { randomNum } from "../utils";
+import uniqid from "uniqid";
 import ListInput from "./ListInput";
 
 function Form(props) {
   const [display, setDisplay] = useState(props.display);
   const [note, setNote] = useState({
-    id: randomNum(),
+    id: uniqid(),
     title: "",
     note: "",
     list: [],
@@ -21,14 +21,14 @@ function Form(props) {
     let newNote = { ...note };
     newNote.list = [
       ...newNote.list,
-      { name: value, completed: false, id: randomNum() },
+      { name: value, completed: false, id: uniqid() },
     ];
     setNote(newNote);
   };
 
   const resetForm = () => {
     setNote({
-      id: "",
+      id: uniqid(),
       title: "",
       note: "",
       list: [],
@@ -75,7 +75,7 @@ function Form(props) {
       ) : null}
 
       {note.list.map((item) => (
-        <li className="temporary-form-list-item" key={randomNum()}>
+        <li className="temporary-form-list-item" key={uniqid()}>
           {item.name}
         </li>
       ))}

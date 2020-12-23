@@ -80,7 +80,7 @@ function Note(props) {
       )}
 
       {list !== undefined &&
-        list.map((item, index) => (
+        list.map((item) => (
           <ListItem
             deleteListItem={() => props.deleteListItem(id, item.id)}
             edit={false}

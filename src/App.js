@@ -2,7 +2,7 @@ import "./App.css";
 import React, { useState } from "react";
 import Form from "./components/Form.js";
 import Note from "./components/Note";
-import { randomNum } from "./utils";
+import uniqid from "uniqid";
 
 function App(props) {
   const [notes, setNotes] = useState(props.sample);
@@ -19,7 +19,7 @@ function App(props) {
               ...note,
               list: [
                 ...note.list,
-                { name: value, completed: false, id: randomNum() },
+                { name: value, completed: false, id: uniqid() },
               ],
             }
           : note
