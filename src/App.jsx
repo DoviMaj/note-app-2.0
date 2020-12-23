@@ -1,6 +1,6 @@
 import "./assets/stylesheets/App.css";
 import React, { useState } from "react";
-import Form from "./components/Form.js";
+import Form from "./components/Form";
 import Note from "./components/Note";
 import uniqid from "uniqid";
 
