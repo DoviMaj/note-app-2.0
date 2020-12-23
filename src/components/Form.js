@@ -4,14 +4,19 @@ import ListInput from "./ListInput";
 
 function Form(props) {
   const [display, setDisplay] = useState(props.display);
-  const [note, setNote] = useState({
+  const initialState = {
     id: uniqid(),
     title: "",
     note: "",
     list: [],
     date: "",
     project: "",
-  });
+  };
+  const [note, setNote] = useState(initialState);
+
+  const resetForm = () => {
+    setNote(initialState);
+  };
 
   const handleChange = ({ target: { name, value } }) => {
     setNote({ ...note, [name]: value });
@@ -24,17 +29,6 @@ function Form(props) {
       { name: value, completed: false, id: uniqid() },
     ];
     setNote(newNote);
-  };
-
-  const resetForm = () => {
-    setNote({
-      id: uniqid(),
-      title: "",
-      note: "",
-      list: [],
-      date: "",
-      project: "",
-    });
   };
 
   const handleSubmit = () => {
