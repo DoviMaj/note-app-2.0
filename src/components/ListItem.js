@@ -4,16 +4,12 @@ function ListItem(props) {
   const [listItemEdit, setListItemEdit] = useState(props.edit);
   const [mouseHover, setMouseHover] = useState(false);
 
-  const toggleMouseHover = () => {
-    setMouseHover(!mouseHover);
-  };
   return (
-    <div>
-      <div
-        className="list-item"
-        onMouseEnter={toggleMouseHover}
-        onMouseLeave={toggleMouseHover}
-      >
+    <div
+      onMouseEnter={() => setMouseHover(true)}
+      onMouseLeave={() => setMouseHover(false)}
+    >
+      <div className="list-item">
         <input
           name="checkbox"
           onChange={(e) => props.changeListItem(e)}

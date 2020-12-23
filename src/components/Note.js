@@ -14,15 +14,11 @@ function Note(props) {
     props.changeNoteField(value, field, id);
   };
 
-  const toggleMouseHover = () => {
-    setMouseHover(!mouseHover);
-  };
-
   return (
     <div
       className="note-wrapper"
-      onMouseEnter={toggleMouseHover}
-      onMouseLeave={toggleMouseHover}
+      onMouseEnter={() => setMouseHover(true)}
+      onMouseLeave={() => setMouseHover(false)}
     >
       {mouseHover ? (
         <button className="delete-button" onClick={() => props.deleteNote(id)}>
@@ -88,10 +84,9 @@ function Note(props) {
           <ListItem
             deleteListItem={() => props.deleteListItem(id, item.id)}
             edit={false}
-            id={item.id}
             changeListItem={(e) => props.changeListItem(e, id, item.id)}
             completed={item.completed}
-            key={`${index}`}
+            key={item.id}
             item={item.name}
           />
         ))}
