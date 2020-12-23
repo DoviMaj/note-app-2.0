@@ -5,7 +5,7 @@ import ListInput from "./ListInput";
 function Form(props) {
   const [display, setDisplay] = useState(props.display);
   const [note, setNote] = useState({
-    id: "",
+    id: randomNum(),
     title: "",
     note: "",
     list: [],
@@ -62,7 +62,7 @@ function Form(props) {
       <textarea
         className="input-field"
         id="note-input"
-        placeholder="take a note..."
+        placeholder="Take a note..."
         name="note"
         value={note.note}
         aria-label="note-input"
