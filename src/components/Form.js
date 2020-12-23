@@ -74,8 +74,8 @@ function Form(props) {
         <ListInput handleListInput={(value) => handleListInput(value)} />
       ) : null}
 
-      {note.list.map((item, index) => (
-        <li className="temporary-form-list-item" key={index}>
+      {note.list.map((item) => (
+        <li className="temporary-form-list-item" key={randomNum()}>
           {item.name}
         </li>
       ))}
