@@ -72,22 +72,35 @@ function App(props) {
     setNotes(newNotes);
   };
 
+  const clearNotes = () => {
+    setNotes([]);
+  };
+
   return (
     <div className="App">
-      <Form display={false} handleForm={(note) => handleForm(note)} />
+      <div className="form-wrapper">
+        <Form display={false} handleForm={(note) => handleForm(note)} />
+        {notes.length !== 0 && (
+          <button className="clear-all-button" onClick={clearNotes}>
+            Clear Notes
+          </button>
+        )}
+      </div>
+
       <div className="notes-container">
-        {notes.map((note) => (
-          <Note
-            deleteListItem={deleteListItem}
-            deleteNote={deleteNote}
-            edit={false}
-            changeNoteField={changeNoteField}
-            addListItem={addListItem}
-            changeListItem={changeListItem}
-            key={note.id}
-            note={note}
-          />
-        ))}
+        {notes.length !== 0 &&
+          notes.map((note) => (
+            <Note
+              deleteListItem={deleteListItem}
+              deleteNote={deleteNote}
+              edit={false}
+              changeNoteField={changeNoteField}
+              addListItem={addListItem}
+              changeListItem={changeListItem}
+              key={note.id}
+              note={note}
+            />
+          ))}
       </div>
     </div>
   );
