@@ -185,3 +185,24 @@ input.change-input {
   background-color: antiquewhite;
   display: block;
 }
+
+.delete-button {
+  border: none;
+  border-radius: 18px;
+  outline: none;
+  width: 25px;
+  height: 25px;
+  background-color: white;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: -8px;
+  left: 204px;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+  background-color: antiquewhite;
+}

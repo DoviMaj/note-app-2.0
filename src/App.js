@@ -1,4 +1,4 @@
-import "./App.css";
+import "./assets/stylesheets/App.css";
 import React, { useState } from "react";
 import Form from "./components/Form.js";
 import Note from "./components/Note";
