@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import uniqid from "uniqid";
 import ListInput from "./ListInput";
+import "../assets/stylesheets/Form.css";
 
 function Form(props) {
   const [display, setDisplay] = useState(props.display);
@@ -43,8 +44,7 @@ function Form(props) {
     <div className="form">
       {display ? (
         <input
-          className="input-field"
-          id="title-input"
+          className="input-field title-input"
           placeholder="Title"
           name="title"
           value={note.title}

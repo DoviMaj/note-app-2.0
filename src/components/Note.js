@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ListInput from "./ListInput";
 import ListItem from "./ListItem";
+import "../assets/stylesheets/Note.css";
 
 function Note(props) {
   const { id, title, note, list, project, date } = props.note;
@@ -94,10 +95,10 @@ function Note(props) {
       <ListInput handleListInput={(value) => props.addListItem(value, id)} />
 
       <div className="due-date-div">
-        <p className="project" data-testid="project">
+        <p className="project bottom-tag" data-testid="project">
           {project}
         </p>
-        <p className="project" data-testid="date" id="due-date">
+        <p className="project bottom-tag" data-testid="date" id="due-date">
           {date}
         </p>
       </div>
