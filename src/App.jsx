@@ -1,13 +1,53 @@
 import "./assets/stylesheets/App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "./components/Form";
 import Note from "./components/Note";
 import uniqid from "uniqid";
+import firebase, { auth } from "./firebase.js";
+import "firebase/firestore";
+import "firebase/analytics";
+import SignIn from "./components/SignIn";
+import SignOut from "./components/SignOut";
+import { useAuthState } from "react-firebase-hooks/auth";
+
+const db = firebase.firestore();
+const firestore = firebase.firestore();
 
 function App(props) {
+  const [user, loading] = useAuthState(auth);
   const [notes, setNotes] = useState(props.sample);
+  const usersRef = firestore.collection("users");
 
-  const handleForm = (note) => {
+  useEffect(() => {
+    if (user !== null) {
+      if (usersRef.doc(user.uid) === null) {
+        usersRef.doc(user.uid).set({ notes: notes });
+      } else {
+        var docRef = db.collection("users").doc(user.uid);
+        docRef
+          .get()
+          .then(function (doc) {
+            if (doc.exists) {
+              const result = doc.data();
+              setNotes(result.notes);
+            } else {
+              console.log("No such document!");
+            }
+          })
+          .catch(function (error) {
+            console.log("Error getting document:", error);
+          });
+      }
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user !== null) {
+      usersRef.doc(user.uid).set({ notes: notes });
+    }
+  }, [notes]);
+
+  const handleForm = async (note) => {
     setNotes([note, ...notes]);
   };
 
@@ -78,6 +118,9 @@ function App(props) {
 
   return (
     <div className="App">
+      {user !== null ? <SignOut /> : <SignIn />}
+
+      {user !== null && user.displayName}
       <div className="form-wrapper">
         <Form display={false} handleForm={(note) => handleForm(note)} />
         {notes.length !== 0 && (
@@ -87,21 +130,25 @@ function App(props) {
         )}
       </div>
 
-      <div className="notes-container">
-        {notes.length !== 0 &&
-          notes.map((note) => (
-            <Note
-              deleteListItem={deleteListItem}
-              deleteNote={deleteNote}
-              edit={false}
-              changeNoteField={changeNoteField}
-              addListItem={addListItem}
-              changeListItem={changeListItem}
-              key={note.id}
-              note={note}
-            />
-          ))}
-      </div>
+      {loading ? (
+        <p>loading...</p>
+      ) : (
+        <div className="notes-container">
+          {notes.length !== 0 &&
+            notes.map((note) => (
+              <Note
+                deleteListItem={deleteListItem}
+                deleteNote={deleteNote}
+                edit={false}
+                changeNoteField={changeNoteField}
+                addListItem={addListItem}
+                changeListItem={changeListItem}
+                key={note.id}
+                note={note}
+              />
+            ))}
+        </div>
+      )}
     </div>
   );
 }
