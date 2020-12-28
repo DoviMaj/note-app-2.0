@@ -1,5 +1,8 @@
 .form-wrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .form {
@@ -7,7 +10,6 @@
   flex-direction: column;
   width: 500px;
   position: relative;
-  margin: 0 auto;
   border-radius: 5px;
   animation: fadeInFromNone 1.7s ease-in;
   background-color: var(--section-color);

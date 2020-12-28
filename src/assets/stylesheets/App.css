@@ -2,18 +2,57 @@ select#projects:focus {
   outline: none;
 }
 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.login {
+  border-radius: 5px;
+  margin-left: 20px;
+  margin-top: 20px;
+  position: absolute;
+  left: 10px;
+}
+
+.sign-in {
+  display: flex;
+  flex-flow: column;
+  gap: 10px;
+}
+
+.user-img {
+  border-radius: 50px;
+  width: 60px;
+}
+
 label {
   align-self: center;
 }
 
+.hide {
+  visibility: hidden;
+}
+
 .clear-all-button {
-  position: absolute;
-  right: 200px;
   padding: 10px;
   background-color: antiquewhite;
   border-radius: 5px;
   cursor: pointer;
-  top: 30px;
+  margin-right: 30px;
+  align-self: center;
+  position: absolute;
+  right: 10px;
+}
+.clear-all-button:hover {
+  background-color: red;
 }
 
 input {
@@ -124,5 +163,17 @@ img:hover {
   }
   #images-ul {
     width: 181px;
+  }
+}
+
+@media (max-width: 870px) {
+  .login {
+    position: initial;
+  }
+  .clear-all-button {
+    position: initial;
+  }
+  .header {
+    justify-content: space-around;
   }
 }
