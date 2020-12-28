@@ -4,8 +4,6 @@ import Form from "./components/Form";
 import Note from "./components/Note";
 import uniqid from "uniqid";
 import firebase, { auth } from "./firebase.js";
-import "firebase/firestore";
-import "firebase/analytics";
 import SignIn from "./components/SignIn";
 import SignOut from "./components/SignOut";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -118,20 +116,35 @@ function App(props) {
 
   return (
     <div className="App">
-      {user !== null ? <SignOut /> : <SignIn />}
-
-      {user !== null && user.displayName}
-      <div className="form-wrapper">
+      <div className="header">
+        <div className="login">
+          {user !== null ? (
+            <div className="sign-in">
+              <img
+                className="user-img"
+                alt="user-img"
+                src={auth.currentUser.photoURL}
+              ></img>
+              <SignOut />
+            </div>
+          ) : (
+            <SignIn />
+          )}
+        </div>
         <Form display={false} handleForm={(note) => handleForm(note)} />
-        {notes.length !== 0 && (
-          <button className="clear-all-button" onClick={clearNotes}>
-            Clear Notes
-          </button>
-        )}
+
+        <span
+          className={`clear-all-button ${notes.length === 0 && "hide"}`}
+          onClick={clearNotes}
+        >
+          Clear Notes
+        </span>
       </div>
 
       {loading ? (
-        <p>loading...</p>
+        <div className="loading">
+          <p style={{ fontSize: "1.5rem" }}>loading...</p>
+        </div>
       ) : (
         <div className="notes-container">
           {notes.length !== 0 &&
