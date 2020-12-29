@@ -7,6 +7,8 @@ function Note(props) {
   const { id, title, note, list, project, date } = props.note;
   const [titleEdit, setTitleEdit] = useState(props.edit);
   const [noteEdit, setNoteEdit] = useState(props.edit);
+  const [projectEdit, setProjectEdit] = useState(props.edit);
+  const [dateEdit, setDateEdit] = useState(props.edit);
   const [mouseHover, setMouseHover] = useState(false);
 
   const submitChange = (e) => {
@@ -27,11 +29,13 @@ function Note(props) {
         </button>
       ) : null}
 
+      {/* TITLE */}
       <div>
-        {titleEdit ? (
+        {!title || titleEdit ? (
           <input
             autoFocus
             name="title"
+            placeholder="Title"
             onChange={(e) => submitChange(e)}
             onBlur={() => setTitleEdit(!titleEdit)}
             onKeyUp={(e) =>
@@ -52,16 +56,18 @@ function Note(props) {
         )}
       </div>
 
-      {noteEdit ? (
+      {/* NOTE */}
+      {noteEdit || !note ? (
         <textarea
           autoFocus
           // sets autoFocus to end of text
-          onFocus={function (e) {
+          onFocus={(e) => {
             var val = e.target.value;
             e.target.value = "";
             e.target.value = val;
           }}
           name="note"
+          placeholder="add a note..."
           value={note}
           onChange={(e) => submitChange(e)}
           onBlur={() => setNoteEdit(!noteEdit)}
@@ -80,7 +86,8 @@ function Note(props) {
         </div>
       )}
 
-      {list !== undefined &&
+      {/* LIST */}
+      {list &&
         list.map((item) => (
           <ListItem
             deleteListItem={() => props.deleteListItem(id, item.id)}
@@ -94,13 +101,49 @@ function Note(props) {
 
       <ListInput handleListInput={(value) => props.addListItem(value, id)} />
 
-      <div className="due-date-div">
-        <p className="project bottom-tag" data-testid="project">
-          {project}
-        </p>
-        <p className="project bottom-tag" data-testid="date" id="due-date">
-          {date}
-        </p>
+      <div className="note-bottom">
+        {!project || projectEdit ? (
+          <input
+            className="project bottom-tag"
+            data-testid="project"
+            placeholder="project"
+            name="project"
+            value={project}
+            onBlur={() => setProjectEdit(!projectEdit)}
+            onKeyDown={(e) => e.key === "Enter" && setProjectEdit(!projectEdit)}
+            onChange={(e) => submitChange(e)}
+          ></input>
+        ) : (
+          <p
+            className="project bottom-tag"
+            data-testid="project"
+            onClick={() => setProjectEdit(!projectEdit)}
+          >
+            {project}
+          </p>
+        )}
+
+        {!date || dateEdit ? (
+          <input
+            className="project bottom-tag"
+            data-testid="date"
+            id="due-date"
+            type="date"
+            name="date"
+            value={date}
+            onMouseLeave={() => setDateEdit(!dateEdit)}
+            onChange={(e) => submitChange(e)}
+          ></input>
+        ) : (
+          <p
+            className="project bottom-tag"
+            data-testid="date"
+            id="due-date"
+            onClick={() => setDateEdit(!dateEdit)}
+          >
+            {date}
+          </p>
+        )}
       </div>
     </div>
   );
