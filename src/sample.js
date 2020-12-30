@@ -3,39 +3,24 @@ import uniqid from "uniqid";
 let sample = [
   {
     id: uniqid(),
-    title: "Adventure",
-    note: "my adventure wish list",
-    list: [
-      {
-        name: "Hike the Dobson Trail",
-        completed: false,
-        id: uniqid(),
-      },
-      { name: "Canoe Down the Amazon River", completed: true, id: uniqid() },
-      {
-        name: "Cross the Bridge of the Immortals in China",
-        completed: true,
-        id: uniqid(),
-      },
-      {
-        name: "Dive Off Stari Most Bridge in Mostar, Bosnia",
-        completed: false,
-        id: uniqid(),
-      },
-    ],
-    project: "adventure",
+    title: "Dinner Planning",
+    note:
+      "Planning, preparing, and portioning your meals ahead of time is one of the most effective tools for keeping your food budget in check",
+    list: [],
+    project: "dinner",
     date: "2021-12-17",
   },
   {
     id: uniqid(),
-    title: "Be fit",
-    note: "and healthy",
+    title: "My Shopping List",
+    note: "need to go to that market",
     list: [
-      { name: "One Handed Push Up", completed: true, id: uniqid() },
-      { name: "Run London Marathon", completed: false, id: uniqid() },
-      { name: "Stick on a Diet", completed: false, id: uniqid() },
+      { name: "way protein", completed: true, id: uniqid() },
+      { name: "paper towels", completed: false, id: uniqid() },
+      { name: "after shave", completed: true, id: uniqid() },
+      { name: "bread", completed: false, id: uniqid() },
     ],
-    project: "Health and Fitness",
+    project: "to-buy",
     date: "2020-12-17",
   },
 ];
