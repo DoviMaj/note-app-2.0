@@ -8,6 +8,7 @@ select#projects:focus {
   justify-content: center;
   flex-wrap: wrap;
 }
+
 .loading {
   display: flex;
   justify-content: center;
@@ -97,7 +98,7 @@ input {
   padding: 10px;
   border-radius: 10px;
   flex-shrink: 0;
-  margin: 9px auto;
+
   align-content: normal;
 }
 

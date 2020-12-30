@@ -6,8 +6,6 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: url(../img/img5.jpg) no-repeat fixed;
-  background-size: cover;
   font-family: "Montserrat", "sans-serif";
   min-height: 100%;
 }

@@ -1,33 +1,56 @@
 import "./assets/stylesheets/App.css";
 import React, { useEffect, useState } from "react";
+import firebase, { auth } from "./firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
 import Form from "./components/Form";
 import Note from "./components/Note";
 import uniqid from "uniqid";
-import firebase, { auth } from "./firebase.js";
+import BackgroundChange from "./components/BackroundChange";
 import SignIn from "./components/SignIn";
 import SignOut from "./components/SignOut";
-import { useAuthState } from "react-firebase-hooks/auth";
+import images from "./backgroundImg";
 
-const db = firebase.firestore();
 const firestore = firebase.firestore();
 
 function App(props) {
   const [user, loading] = useAuthState(auth);
   const [notes, setNotes] = useState(props.sample);
+  const [backgroundImg, setBackgroundImg] = useState(images[5]);
   const usersRef = firestore.collection("users");
 
+  const changeBackground = (e) => {
+    setBackgroundImg(images[e.target.name]);
+  };
+
   useEffect(() => {
-    if (user !== null) {
-      if (usersRef.doc(user.uid) === null) {
-        usersRef.doc(user.uid).set({ notes: notes });
+    document.body.style.backgroundImage = `url(${backgroundImg.src})`;
+    document.body.style.backgroundSize = "cover";
+    if (user) {
+      usersRef.doc(user.uid).update({ backgroundImg: backgroundImg });
+    }
+  }, [backgroundImg]);
+
+  useEffect(() => {
+    if (user) {
+      usersRef.doc(user.uid).update({ notes: notes });
+    }
+  }, [notes]);
+
+  useEffect(() => {
+    if (user) {
+      if (usersRef.doc(user.uid)) {
+        usersRef
+          .doc(user.uid)
+          .set({ notes: notes, backgroundImg: backgroundImg });
       } else {
-        var docRef = db.collection("users").doc(user.uid);
+        var docRef = usersRef.doc(user.uid);
         docRef
           .get()
           .then(function (doc) {
             if (doc.exists) {
               const result = doc.data();
               setNotes(result.notes);
+              setBackgroundImg(result.backgroundImg);
             } else {
               console.log("No such document!");
             }
@@ -38,12 +61,6 @@ function App(props) {
       }
     }
   }, [user]);
-
-  useEffect(() => {
-    if (user !== null) {
-      usersRef.doc(user.uid).set({ notes: notes });
-    }
-  }, [notes]);
 
   const handleForm = async (note) => {
     setNotes([note, ...notes]);
@@ -131,8 +148,7 @@ function App(props) {
             <SignIn />
           )}
         </div>
-        <Form display={false} handleForm={(note) => handleForm(note)} />
-
+        <BackgroundChange changeBackground={changeBackground} />
         <span
           className={`clear-all-button ${notes.length === 0 && "hide"}`}
           onClick={clearNotes}
@@ -140,6 +156,7 @@ function App(props) {
           Clear Notes
         </span>
       </div>
+      <Form display={false} handleForm={(note) => handleForm(note)} />
 
       {loading ? (
         <div className="loading">
