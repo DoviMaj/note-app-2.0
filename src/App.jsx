@@ -38,27 +38,18 @@ function App(props) {
 
   useEffect(() => {
     if (user) {
-      if (usersRef.doc(user.uid)) {
-        usersRef
-          .doc(user.uid)
-          .set({ notes: notes, backgroundImg: backgroundImg });
-      } else {
-        var docRef = usersRef.doc(user.uid);
-        docRef
-          .get()
-          .then(function (doc) {
-            if (doc.exists) {
-              const result = doc.data();
-              setNotes(result.notes);
-              setBackgroundImg(result.backgroundImg);
-            } else {
-              console.log("No such document!");
-            }
-          })
-          .catch(function (error) {
-            console.log("Error getting document:", error);
-          });
-      }
+      var userData = usersRef.doc(user.uid);
+      userData.get().then((data) => {
+        const result = data.data();
+        if (!data.exists) {
+          usersRef
+            .doc(user.uid)
+            .set({ notes: notes, backgroundImg: backgroundImg });
+        } else {
+          setNotes(result.notes);
+          setBackgroundImg(result.backgroundImg);
+        }
+      });
     }
   }, [user]);
 
