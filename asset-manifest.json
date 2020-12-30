@@ -1,21 +1,29 @@
 {
   "files": {
-    "main.css": "/note-app-2.0/static/css/main.3a5566f0.chunk.css",
-    "main.js": "/note-app-2.0/static/js/main.550ae9de.chunk.js",
-    "main.js.map": "/note-app-2.0/static/js/main.550ae9de.chunk.js.map",
+    "main.css": "/note-app-2.0/static/css/main.785b7055.chunk.css",
+    "main.js": "/note-app-2.0/static/js/main.e9655dc6.chunk.js",
+    "main.js.map": "/note-app-2.0/static/js/main.e9655dc6.chunk.js.map",
     "runtime-main.js": "/note-app-2.0/static/js/runtime-main.a87a9187.js",
     "runtime-main.js.map": "/note-app-2.0/static/js/runtime-main.a87a9187.js.map",
-    "static/js/2.66736af5.chunk.js": "/note-app-2.0/static/js/2.66736af5.chunk.js",
-    "static/js/2.66736af5.chunk.js.map": "/note-app-2.0/static/js/2.66736af5.chunk.js.map",
+    "static/js/2.803adabd.chunk.js": "/note-app-2.0/static/js/2.803adabd.chunk.js",
+    "static/js/2.803adabd.chunk.js.map": "/note-app-2.0/static/js/2.803adabd.chunk.js.map",
     "index.html": "/note-app-2.0/index.html",
-    "static/css/main.3a5566f0.chunk.css.map": "/note-app-2.0/static/css/main.3a5566f0.chunk.css.map",
-    "static/js/2.66736af5.chunk.js.LICENSE.txt": "/note-app-2.0/static/js/2.66736af5.chunk.js.LICENSE.txt",
-    "static/media/index.css": "/note-app-2.0/static/media/img5.c4890551.jpg"
+    "static/css/main.785b7055.chunk.css.map": "/note-app-2.0/static/css/main.785b7055.chunk.css.map",
+    "static/js/2.803adabd.chunk.js.LICENSE.txt": "/note-app-2.0/static/js/2.803adabd.chunk.js.LICENSE.txt",
+    "static/media/img0.6388ad41.jpg": "/note-app-2.0/static/media/img0.6388ad41.jpg",
+    "static/media/img1.df41b80b.jpg": "/note-app-2.0/static/media/img1.df41b80b.jpg",
+    "static/media/img2.35c99161.jpg": "/note-app-2.0/static/media/img2.35c99161.jpg",
+    "static/media/img3.914923cf.jpg": "/note-app-2.0/static/media/img3.914923cf.jpg",
+    "static/media/img4.028696c5.jpg": "/note-app-2.0/static/media/img4.028696c5.jpg",
+    "static/media/img5.c4890551.jpg": "/note-app-2.0/static/media/img5.c4890551.jpg",
+    "static/media/img6.541cb48e.jpg": "/note-app-2.0/static/media/img6.541cb48e.jpg",
+    "static/media/img7.8366e1fe.jpg": "/note-app-2.0/static/media/img7.8366e1fe.jpg",
+    "static/media/img8.29ddd92a.jpg": "/note-app-2.0/static/media/img8.29ddd92a.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.a87a9187.js",
-    "static/js/2.66736af5.chunk.js",
-    "static/css/main.3a5566f0.chunk.css",
-    "static/js/main.550ae9de.chunk.js"
+    "static/js/2.803adabd.chunk.js",
+    "static/css/main.785b7055.chunk.css",
+    "static/js/main.e9655dc6.chunk.js"
   ]
 }
