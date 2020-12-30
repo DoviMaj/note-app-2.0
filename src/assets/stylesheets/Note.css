@@ -156,6 +156,7 @@ input.change-input {
   justify-content: center;
   outline: none;
   border: none;
+  background-color: white;
 }
 
 .note-bottom {
