@@ -1,3 +1,7 @@
+# [Note App 2.0](https://dovimaj.github.io/note-app-2.0/)
+
+Refactored version of [note app](https://github.com/DoviMaj/noteApp)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
